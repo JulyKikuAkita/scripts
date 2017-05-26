@@ -1,0 +1,25 @@
+{
+  "capabilities":
+      [
+        {
+          "automationName": "Appium",
+          "maxInstances": 1,
+          "platformName": "Android"
+        }
+      ],
+  "configuration":
+  {
+    "cleanUpCycle": 2000,
+    "timeout": 30000,
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "url": "http://192.168.10.154:4735/wd/hub",
+    "maxSession": 1,
+    "port": 4735,
+    "host": "192.168.10.154",
+    "role": "node",
+    "register": true,
+    "registerCycle": 5000,
+    "hubPort": 4444,
+    "hubHost": "192.168.10.154"
+  }
+}

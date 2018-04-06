@@ -24,17 +24,18 @@ if $type == 'yml'
 
   yaml = YAML::load_file($fileLocation) #Load
 
+  $ORIG = yaml
   $J = yaml
   
-  $keyPath.each do |section|
+  $keyPath.each do |section|  #loops into sub keyPath
     $J = yaml[section]
   end
   
-  #puts $J #debug. print out all fields
+  #puts $J # debug-print out all fields
+  
+  $J[$editSection] = $value
 
-  $J["test_rail_config"][$editSection] = $value
-
-  File.open($fileLocation, 'w') {|f| YAML.dump($J,f,indentation: 2)} #Store
+  File.open($fileLocation, 'w') {|f| YAML.dump($ORIG,f,indentation: 2)} #Store
 else
   File.open($fileLocation, 'r') do |f1|
     while line = f1.gets

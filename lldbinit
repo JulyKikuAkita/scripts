@@ -1,0 +1,30 @@
+command script import /Users/ilee1/code/LLDB/lldb_commands/dslldb.py
+
+# rd: print recursive description of entire app window, or of a specified view
+#
+# usage: rd [view]
+#
+# if no view is specified, prints recursive description of app's keyWindow
+#
+command regex rd 's/^[[:space:]]*$/po [[[UIApplication sharedApplication] keyWindow] recursiveDescription]/' 's/^(.+)$/po [%1 recursiveDescription]/'
+
+# slow-on: turn slow animations on, for testing on device only, and optionally set the speed
+#
+# usage: slow-on [speed]
+#
+# if no speed is specified, the speed is set to 0.1, i.e. one-tenth of normal speed. You can also specify a speed greater than 1 for fast animation.
+#
+# note: for testing on device only, this will crash the app in the simulator
+# 
+command regex slow-on 's/^[[:space:]]*$/p [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] layer] setSpeed:0.1]/' 's/^(.+)$/p [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] layer] setSpeed:%1]/'
+
+
+# slow-off: turn slow animations off, for testing on device only
+#
+# usage: slow-off
+#
+# resets the animation speed to normal
+#
+# note: for testing on device only, this will crash the app in the simulator
+# 
+command alias slow-off p [(CALayer *)[[[[UIApplication sharedApplication] windows] objectAtIndex:0] layer] setSpeed:1]

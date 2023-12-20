@@ -1,3 +1,4 @@
+# Put this under ~/.gitconfig or ~/.config/git/config
 [alias]
 	# List things
     tags = "tag -l"
@@ -18,7 +19,7 @@
     ll = log --color=always --all --topo-order --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
     # Log that shows the last 10 commits as a graph
-    lg = "log -10 --color=always --all --graph --topo-order --pretty='%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	
 	# macOS original
 	lgmac = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -44,13 +45,11 @@
     # Create a commit that will be automatically squashed as a fixup when you
     # run `git rebase --autosquash`
     fixup = "commit --fixup=HEAD"
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [core]
-	excludesfile = /Users/ilee1/.gitignore_global
+	excludesfile = /Users/xxx/.gitignore_global
+	pager = less -F -X
+	compression = 9
+	ignorecase = false
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -58,7 +57,18 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [user]
-	name = 
-	email = 
+	name =
+	email =
 [commit]
-	template = /Users/ilee1/.stCommitMsg
+	template = /Users/xxx/.stCommitMsg
+[pager]
+	branch = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pull]
+	ff = only
+[http]
+	postBuffer = 524288000
